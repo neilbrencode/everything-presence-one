@@ -15,7 +15,7 @@ substitutions:
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
-  name_add_mac_suffix: true
+  name_add_mac_suffix: false
   project:
     name: ${project_name}
     version: ${project_version}
@@ -30,15 +30,25 @@ api:
 ota:
 
 wifi:
-  fast_connect: ${hidden_ssid}
-  ap: {}
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
 
 captive_portal:
 
 improv_serial:
 
-esp32_improv:
-  authorizer: none
+#esp32_improv:
+#  authorizer: none
+
+# Add Bluetooth Proxy Support
+esp32_ble_tracker:
+  scan_parameters:
+    interval: 1100ms
+    window: 1100ms
+    active: true
+
+bluetooth_proxy:
+  active: true
 
 dashboard_import:
   package_import_url: github://everythingsmarthome/everything-presence-one/everything-presence-one.yaml@main
